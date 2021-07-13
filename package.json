@@ -1,0 +1,29 @@
+{
+  "name": "esnet-chord-v1",
+  "version": "1.0.0",
+  "description": "ESnet Chord Diagram Plugin for Grafana 7.0+",
+  "private": true,
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch",
+    "sign": "grafana-toolkit plugin:sign",
+    "start": "yarn watch"
+  },
+  "author": "ESnet - Lawrence Berkeley National Laboratory",
+  "license": "Apache-2.0",
+  "Dependencies":{
+    "grafana-plugin-support": "0.4.0"
+  },
+  "devDependencies": {
+    "emotion": "latest",
+    "@grafana/data": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
+    "@grafana/runtime": "latest"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
