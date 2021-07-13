@@ -4,7 +4,7 @@
 
 This is a panel plugin for generating Chord diagrams in Grafana 7.0+. This plugin requires [d3](https://github.com/d3/d3).
 
-
+![Sceenshot](https://github.com/esnet/grafana-esnet-chord-panel/blob/92dcc192ec4bc3cdffcca6a59318b3bc21031fcc/src/img/Chord-Example.png)
 
 ## Getting started
 
