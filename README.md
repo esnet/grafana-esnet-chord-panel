@@ -1,4 +1,4 @@
-# ESnet Chord Grafana Plugin
+# ESnet Chord Grafana Panel Plugin
 
 
 
