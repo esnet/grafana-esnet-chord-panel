@@ -4,22 +4,20 @@ import {wordWrap} from './word_wrap.js';
 import {DataFrameView } from '@grafana/data';
 
 
-function createViz(svg,data,src,target,val,txtLen){
-  //--- do a bit of work to setup the visual layout of the wiget
-  var ref = document.getElementById("vizFoo");	
-  var height = 600;
-  
-  if( ref  === null){
+function createViz(elem,height,data,src,target,val,txtLen){
+  //--- do a bit of work to setup the visual layout of the wiget --------
+  if( elem  === null){
     console.log("bailing after failing to find parent element");
     return;
   }
-
-  while (ref.firstChild){
-      //--- clear out old contents
-      ref.removeChild(ref.lastChild);
+  while (elem !== undefined && elem.firstChild){
+    //--- clear out old contents
+    elem.removeChild(elem.lastChild);
   }
-  
-  height = ref.clientHeight;
+ 
+
+  let svg = d3.select(elem);
+
   svg.attr("viewBox", [-height / 2, -height / 2, height, height]);
 
   const diameter = height;
@@ -31,9 +29,10 @@ function createViz(svg,data,src,target,val,txtLen){
     return;
   }
 
-
   const innerRadius =  radius - (txtLen+4+12);       //---- leave room for labels on outside
   const outerRadius =  innerRadius + 12;   //---- sets size of outer band
+
+
 
   const frame = data.series[0];
  
@@ -45,16 +44,11 @@ function createViz(svg,data,src,target,val,txtLen){
 
   const view = new DataFrameView(frame);
   const [matrix,names,nameRevIdx] = prepData(view,src,target,val);
-
   const fieldDisplay = view.getFieldDisplayProcessor(2);    //---- this is making dumb assumption that the quant data we care about is in the 3rd column
 							    //---- TODO: convert this to use val field passed in.
-	//
-  
 
   if(matrix === null)return;
  
-  console.log(frame);
-
 
   const arc = d3.arc()
     .innerRadius(innerRadius)
@@ -210,11 +204,11 @@ function prepData(data,src,target,val){
 
 }
 
-function chord(data,src,target,val,txtLen){
+function chord(data,src,target,val,height,txtLen){
   //-- some react related voodoo
   const ref = useD3((svg) => {
-    createViz(svg,data,src,target,val,txtLen);
-  });
+      createViz(svg,height,data,src,target,val,txtLen);
+    });
   return ref;
 }
 
