@@ -3,4 +3,5 @@ export interface ChordOptions {
   targetField: string;
   valueField: string;
   txtLength: number;
+  colorBySource: boolean;
 }

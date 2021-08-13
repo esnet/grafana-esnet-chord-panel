@@ -4,5 +4,6 @@ export function chord(
   target: string,
   value: string,
   height: number,
-  txtLen: number
+  txtLen: number,
+  colorBy: boolean
 ): LegacyRef<SVGSVGElement> | undefined;

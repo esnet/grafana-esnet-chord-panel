@@ -1,7 +1,6 @@
 import React from "react";
 import { PanelProps } from "@grafana/data";
 import { ChordOptions } from "types";
-//import { useTheme } from '@grafana/ui';
 //import * as d3 from 'd3';
 
 import * as chord from "./chord.js";
@@ -21,7 +20,8 @@ export const esnetChord: React.FC<Props> = ({
     options.targetField,
     options.valueField,
     height,
-    options.txtLength
+    options.txtLength,
+    options.colorBySource
   );
   return <svg ref={ref} width={width} height={height}></svg>;
 };
