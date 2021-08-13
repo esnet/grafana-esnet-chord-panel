@@ -116,7 +116,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
           .attr('stroke', (d) => d3.color(color(d)).darker())
           .call((g) => g.append('title')
               .text((d) => {
-                const name = nameRevIndex.get(d.index);
+                const name = nameRevIdx.get(d.index);
                 const disp = fieldDisplay(d.value);
                 return `${name} Total : ${disp.text} ${disp.suffix}`;
               })))
