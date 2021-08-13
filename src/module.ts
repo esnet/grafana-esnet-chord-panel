@@ -4,26 +4,28 @@ import {
   PanelPlugin,
   FieldConfigProperty,
   FieldColorModeId,
-} from "@grafana/data";
+} from '@grafana/data';
 
-import { ChordOptions } from "./types";
-import { esnetChord } from "./esnetChord";
+import {ChordOptions} from './types';
+import {esnetChord} from './esnetChord';
 
 /**
  * Grafana panel plugin main module
  *
- * @param {*} { panel: React.ComponentType<PanelProps<NetSageSankeyOptions>> | null }
+ * @param {*} { panel:
+ *  React.ComponentType<PanelProps<NetSageSankeyOptions>> | null
+ * }
  * @return {*} { builder: PanelOptionsEditorBuilder<NetSageSankeyOptions> }
  */
-const OptionsCategory = ["Display"];
+const OptionsCategory = ['Display'];
 
 export const plugin = new PanelPlugin<ChordOptions>(esnetChord);
 
 plugin.setPanelOptions((builder) => {
   builder.addSelect({
-    path: "targetField",
-    name: "Target Field",
-    description: "Select the field to use as the target ",
+    path: 'targetField',
+    name: 'Target Field',
+    description: 'Select the field to use as the target ',
     category: OptionsCategory,
     settings: {
       allowCustomValue: false,
@@ -35,20 +37,20 @@ plugin.setPanelOptions((builder) => {
             for (const field of frame.fields) {
               const name = getFieldDisplayName(field, frame, context.data);
               const value = name;
-              options.push({ value, label: name });
+              options.push({value, label: name});
             }
           }
         }
         return Promise.resolve(options);
       },
     },
-    //---- todo: figure out how to guess at a default for these
-    //defaultValue: options[1],
+    // ---- todo: figure out how to guess at a default for these
+    // defaultValue: options[1],
   });
   builder.addSelect({
-    path: "sourceField",
-    name: "Source Field",
-    description: "Select the fields that should be used as the source",
+    path: 'sourceField',
+    name: 'Source Field',
+    description: 'Select the fields that should be used as the source',
     category: OptionsCategory,
     settings: {
       allowCustomValue: false,
@@ -60,19 +62,19 @@ plugin.setPanelOptions((builder) => {
             for (const field of frame.fields) {
               const name = getFieldDisplayName(field, frame, context.data);
               const value = name;
-              options.push({ value, label: name });
+              options.push({value, label: name});
             }
           }
         }
         return Promise.resolve(options);
       },
     },
-    //defaultValue: options[0],
+    // defaultValue: options[0],
   });
   builder.addSelect({
-    path: "valueField",
-    name: "Value Field",
-    description: "Select the numeric field used to size and color chords.",
+    path: 'valueField',
+    name: 'Value Field',
+    description: 'Select the numeric field used to size and color chords.',
     category: OptionsCategory,
     settings: {
       allowCustomValue: false,
@@ -84,22 +86,22 @@ plugin.setPanelOptions((builder) => {
             for (const field of frame.fields) {
               const name = getFieldDisplayName(field, frame, context.data);
               const value = name;
-              options.push({ value, label: name });
+              options.push({value, label: name});
             }
           }
         }
         return Promise.resolve(options);
       },
     },
-    //defaultValue: options[2],
+    // defaultValue: options[2],
   });
   builder.addNumberInput({
-    path: "txtLength",
-    name: "Text Length",
-    description: "adjust amount of space used for labels",
+    path: 'txtLength',
+    name: 'Text Length',
+    description: 'adjust amount of space used for labels',
     category: OptionsCategory,
     settings: {
-      placeholder: "Auto",
+      placeholder: 'Auto',
       integer: true,
       min: 1,
       max: 200,
@@ -107,16 +109,16 @@ plugin.setPanelOptions((builder) => {
     defaultValue: 100,
   });
   builder.addSelect({
-    path: "colorBySource",
-    name: "Color By",
-    description:
-      "Set the chord's color to the source or target of the chord. When a 'by value' color scheme is selected, this has no effect",
+    path: 'colorBySource',
+    name: 'Color By',
+    description: 'Set the chord\'s color to the source or target of the ' +
+      'chord. When a \'by value\' color scheme is selected, this has no effect',
     category: OptionsCategory,
     settings: {
       allowCustomValue: false,
       options: [
-        { value: true, label: "Source" },
-        { value: false, label: "Target" },
+        {value: true, label: 'Source'},
+        {value: false, label: 'Target'},
       ],
     },
     defaultValue: true,
@@ -145,4 +147,4 @@ plugin.useFieldConfig({
   },
 });
 
-//.useFieldConfig({});
+// .useFieldConfig({});

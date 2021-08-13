@@ -42,3 +42,9 @@ This is a panel plugin for generating Chord diagrams in Grafana 7.0+. This plugi
 
 > :warning:
 Grafana 8 requires all plugins to be signed by default. To run unsigned plugins during dev, set `app_mode = development` in **grafana.ini** (typically _/etc/grafana/grafana.ini_) and restart grafana.
+
+## ESLint
+
+Eslint is used to lint the js and ts files. To manually run the linter:
+
+   yarn eslint src/**.{js,ts}
