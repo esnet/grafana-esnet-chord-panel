@@ -107,7 +107,7 @@ plugin.setPanelOptions((builder) => {
     defaultValue: 100,
   });
   builder.addSelect({
-    path: "colorBy",
+    path: "colorBySource",
     name: "Color By",
     description:
       "Set the chord's color to the source or target of the chord. When a 'by value' color scheme is selected, this has no effect",
@@ -115,11 +115,11 @@ plugin.setPanelOptions((builder) => {
     settings: {
       allowCustomValue: false,
       options: [
-        { value: "source", label: "Source" },
-        { value: "target", label: "Target" },
+        { value: true, label: "Source" },
+        { value: false, label: "Target" },
       ],
     },
-    defaultValue: "source",
+    defaultValue: true,
   });
 });
 

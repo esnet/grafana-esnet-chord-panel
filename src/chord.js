@@ -8,7 +8,7 @@ import {
 } from '@grafana/data';
 import { useTheme } from '@grafana/ui';
 
-function createViz(elem,height,data,src,target,val,txtLen,colorBy,theme){
+function createViz(elem,height,data,src,target,val,txtLen,colorBySource,theme){
   // do a bit of work to setup the visual layout of the wiget --------
   if( elem  === null){
     console.log("bailing after failing to find parent element");
@@ -69,7 +69,7 @@ function createViz(elem,height,data,src,target,val,txtLen,colorBy,theme){
   const chords = chord(matrix);
 
   // build ordinal color scale keyed on index used in the matrix
-  let color = makeColorer(colorBy, nameRevIdx, frame, src, target, val)
+  let color = makeColorer(colorBySource, nameRevIdx, frame, src, target, val)
 
   // generate the inner chords
   svg.append("g")
@@ -204,7 +204,7 @@ function prepData(data,src,target,val){
 
 }
 
-function makeColorer(colorBy, nameRevIdx, frame, src, target, val) {
+function makeColorer(colorBySource, nameRevIdx, frame, src, target, val) {
   let sourceField, targetField, valueField = undefined;
 
   frame.fields.forEach(curr => {
@@ -222,12 +222,12 @@ function makeColorer(colorBy, nameRevIdx, frame, src, target, val) {
   let keys = Array.from( nameRevIdx.keys() );
   const color = v => {
     if (v.hasOwnProperty("source") && v.hasOwnProperty("target")) {
-      if (colorBy == "source") {
+      if (colorBySource) {
         return color(v.source);
       }
       return color(v.target);
     }
-    let currField = colorBy == "source" ? sourceField : targetField;
+    let currField = colorBySource ? sourceField : targetField;
     let colorMode = currField.config.color.mode;
 
     // Are we in some discreet color mode (i.e. non-graident).
@@ -251,11 +251,11 @@ function makeColorer(colorBy, nameRevIdx, frame, src, target, val) {
   return color
 }
 
-function chord(data,src,target,val,height,txtLen,colorBy){
+function chord(data,src,target,val,height,txtLen,colorBySource){
   let theme = useTheme();
   // some react related voodoo
   const ref = useD3((svg) => {
-      createViz(svg,height,data,src,target,val,txtLen,colorBy,theme);
+      createViz(svg,height,data,src,target,val,txtLen,colorBySource,theme);
     });
   return ref;
 }
