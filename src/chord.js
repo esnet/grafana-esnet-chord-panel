@@ -148,7 +148,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
 
 const wrap = function(text, width) {
   text.each(function() {
-    const textElem = d3.select(this);
+    const textElem = d3.select(this); // eslint-disable-line no-invalid-this
     const words = textElem.text().split(/\s+/).reverse();
     let word;
     let line = [];
