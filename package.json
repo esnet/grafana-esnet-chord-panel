@@ -13,15 +13,21 @@
   },
   "author": "ESnet - Lawrence Berkeley National Laboratory",
   "license": "Apache-2.0",
-  "Dependencies":{
+  "Dependencies": {
     "grafana-plugin-support": "0.4.0"
   },
   "devDependencies": {
-    "emotion": "latest",
     "@grafana/data": "latest",
+    "@grafana/eslint-config": "^2.5.0",
+    "@grafana/runtime": "latest",
     "@grafana/toolkit": "latest",
     "@grafana/ui": "latest",
-    "@grafana/runtime": "latest"
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "emotion": "latest",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.24.0"
   },
   "engines": {
     "node": ">=14"
