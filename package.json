@@ -20,7 +20,7 @@
     "@grafana/data": "latest",
     "@grafana/eslint-config": "^2.5.0",
     "@grafana/runtime": "latest",
-    "@grafana/toolkit": "latest",
+    "@grafana/toolkit": "8.0.6",
     "@grafana/ui": "latest",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
