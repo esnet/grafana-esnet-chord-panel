@@ -10,17 +10,18 @@ Hash: SHA512
   "rootUrls": [
     "https://dashboard.stardust.es.net/",
     "http://localhost:3000/",
-    "http://localhost:3002/"
+    "http://localhost:3002/",
+    "https://public.stardust.es.net/"
   ],
   "plugin": "esnet-chord-panel",
   "version": "1.0.0",
-  "time": 1631255761125,
+  "time": 1632505937375,
   "keyId": "7e4d0c6a708866e7",
   "files": {
     "LICENSE": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
     "CHANGELOG.md": "6b50cb04377d29449437b7907f2afff0231e54da9d68adb8525f1cb0e5191d4e",
     "module.js.map": "ba4a614ecd39bfe7dfcba576a2ca24d607b7e5a4101b855758ccc4a570b74f55",
-    "plugin.json": "f4f52d685a741b28577baff1177954e73d19f67802874ea31834b5f805e014ce",
+    "plugin.json": "d3c61be4e3fa2d8d048e094cb4d063c572b13ba0ca93b5107a4e7f3aafd57a17",
     "README.md": "2e8fa91e09f730ec4b15294163f25e03043c09e5a88a3c076f36382980dadd5b",
     "img/Chord-Example.png": "7ec434d43dfb3e6477da8daed2cf6c609503d3fb4c8e61a41229757eaab7c3ba",
     "img/logo.svg": "5dbd4949e50100fdaf506929184ad9e488e7dec90fd038ef084272cbaded8589",
@@ -31,9 +32,9 @@ Hash: SHA512
 Version: OpenPGP.js v4.10.1
 Comment: https://openpgpjs.org
 
-wqIEARMKAAYFAmE6/NEACgkQfk0ManCIZucCdAIJASGqlypYzQQC30i4vdCo
-5t+HtUg+/LV6wizYHPKL1lIIkEkqxPZ0tZ6mNZH/LDwvp0gfFSpA9xU5Hg1f
-r7Q09FEcAgkBQhkn22x0vE526/En3g8xTpHf1TEcmOackryMM9rZN0q/F5as
-gFr39fYmu7FrJKkuNJNWXqXl0mqwyhaHdEucaH0=
-=OHTy
+wqEEARMKAAYFAmFOEFEACgkQfk0ManCIZudumAIGP6df78nWqvzExFi0+K0W
+6j4+wtRyO+U5IG2AHxuw9CIu66wlrpW+6rJLp2BfGKWV7rYI5ZHoWmEh5SUk
+lYHKjpMCCQFGcruOY2mm/nLa00ydO3nDdOcnvNHe5QPmoKH9pl5dJZv74o35
+JvsciJhjP1O/Eo8A//khQlhh0aCVCiiH5oPCbQ==
+=w4rs
 -----END PGP SIGNATURE-----
