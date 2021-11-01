@@ -17,10 +17,12 @@ import {useTheme} from '@grafana/ui';
  * @param {integer} txtLen The amount of spaces used for labels
  * @param {boolean} colorBySource Whether to use the source or target field to
  * decide on chord color
+ * @param {integer} pointLength The length of the chord point as a percentage of
+ * the digram's radius
  * @param {GrafanaTheme} theme
 */
 function createViz(elem, height, data, src, target, val, txtLen,
-    colorBySource, theme) {
+    colorBySource, pointLength, theme) {
   // do a bit of work to setup the visual layout of the wiget --------
   if ( elem === null) {
     console.log('bailing after failing to find parent element');
@@ -72,7 +74,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
   const ribbon = d3.ribbonArrow()
       .radius(innerRadius - 2)
       .padAngle(2 / innerRadius)
-      .headRadius(height/20);
+      .headRadius(innerRadius * (pointLength/100.0));
 
   const chord = d3.chordDirected()
       .padAngle( 12 / innerRadius)
@@ -314,14 +316,17 @@ function makeColorer(colorBySource, nameRevIdx, frame, src, target, val) {
  * @param {number} txtLen Space for the text around the chord diagram
  * @param {boolean} colorBySource Should the source or target field be used to
  * color interior chords.
+ * @param {number} pointLength The length of the chord point as a percentage of
+ * the digram's radius
  * @return {*} A d3 callback
  */
-function chord(data, src, target, val, height, txtLen, colorBySource) {
+function chord(data, src, target, val, height, txtLen, colorBySource,
+    pointLength) {
   const theme = useTheme();
   // some react related voodoo
   const ref = useD3((svg) => {
     createViz(svg, height, data, src, target, val, txtLen,
-        colorBySource, theme);
+        colorBySource, pointLength, theme);
   });
   return ref;
 }

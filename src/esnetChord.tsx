@@ -22,6 +22,7 @@ export const esnetChord: React.FC<Props> = ({
       height,
       options.txtLength,
       options.colorBySource,
+      options.pointLength,
   );
   return <svg ref={ref} width={width} height={height}></svg>;
 };
