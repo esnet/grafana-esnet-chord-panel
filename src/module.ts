@@ -123,6 +123,20 @@ plugin.setPanelOptions((builder) => {
     },
     defaultValue: true,
   });
+  builder.addNumberInput({
+    path: 'pointLength',
+    name: 'Point Length',
+    description: 'Adjust the length of the chord point as a percentage of the' +
+      'radius of the chord diagram.',
+    category: OptionsCategory,
+    settings: {
+      placeholder: 'Auto',
+      integer: true,
+      min: 0,
+      max: 100,
+    },
+    defaultValue: 10,
+  });
 });
 
 plugin.useFieldConfig({

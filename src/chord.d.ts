@@ -5,5 +5,6 @@ export function chord(
   value: string,
   height: number,
   txtLen: number,
-  colorBy: boolean
+  colorBySource: boolean,
+  pointLength: number,
 ): LegacyRef<SVGSVGElement> | undefined;

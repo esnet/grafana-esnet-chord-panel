@@ -4,4 +4,5 @@ export interface ChordOptions {
   valueField: string;
   txtLength: number;
   colorBySource: boolean;
+  pointLength: number;
 }
