@@ -40,6 +40,8 @@ This is a panel plugin for generating Chord diagrams in Grafana 7.0+. This plugi
    
    ```
 
+5. Visit localhost:3000 to see the local version of grafana. Use "admin" as the username and "admin" as the password.
+
 > :warning:
 Grafana 8 requires all plugins to be signed by default. To run unsigned plugins during dev, set `app_mode = development` in **grafana.ini** (typically _/etc/grafana/grafana.ini_) and restart grafana.
 
