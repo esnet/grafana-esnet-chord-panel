@@ -1,5 +1,5 @@
 {
-  "name": "esnet-chord-v1",
+  "name": "esnet-chord-panel",
   "version": "1.0.0",
   "description": "ESnet Chord Diagram Plugin for Grafana 7.0+",
   "private": true,
@@ -17,9 +17,9 @@
     "grafana-plugin-support": "0.4.0"
   },
   "devDependencies": {
-    "@grafana/data": "latest",
+    "@grafana/data": "8.3.0",
     "@grafana/eslint-config": "^2.5.0",
-    "@grafana/runtime": "latest",
+    "@grafana/runtime": "8.3.0",
     "@grafana/toolkit": "8.0.6",
     "@grafana/ui": "latest",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
