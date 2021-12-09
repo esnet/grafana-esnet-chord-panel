@@ -1,0 +1,41 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "manifestVersion": "2.0.0",
+  "signatureType": "private",
+  "signedByOrg": "netsage",
+  "signedByOrgName": "netsage",
+  "rootUrls": [
+    "https://dashboard.stardust.es.net/",
+    "http://localhost:3000/",
+    "http://localhost:3002/",
+    "https://public.stardust.es.net/",
+    "https://gf.gc1.dev-stage.stardust.es.net/"
+  ],
+  "plugin": "esnet-chord-panel",
+  "version": "1.0.0",
+  "time": 1639075533352,
+  "keyId": "7e4d0c6a708866e7",
+  "files": {
+    "LICENSE": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "CHANGELOG.md": "6b50cb04377d29449437b7907f2afff0231e54da9d68adb8525f1cb0e5191d4e",
+    "module.js.map": "a832510cd1b2630caee1495abbd015a0a495b5189e169a7337a9ac3d0fb0b4d3",
+    "plugin.json": "0dcc3fac9fefdee69f6b5d6aa20f66e86b3264a3a5662b7c7cb6d9d8ace5707d",
+    "README.md": "44215a0cd9b1cc7af824c3fe82ae10c95413bd5566932c888ab8e48ccfba9664",
+    "img/Chord-Example.png": "7ec434d43dfb3e6477da8daed2cf6c609503d3fb4c8e61a41229757eaab7c3ba",
+    "img/logo.svg": "5dbd4949e50100fdaf506929184ad9e488e7dec90fd038ef084272cbaded8589",
+    "module.js": "619ebb0065eb508b5f05f5572ccc801db63c659dff18365a60f5fcbf6e076c3c"
+  }
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqEEARMKAAYFAmGyTs0ACgkQfk0ManCIZucbQwIJAb11XhnZE2H+DMzOZ5xG
+M0F/h/12MMTKtcXUtqZc3bDr3fYmz992wY5A7X4x96rIoROR0sKT5nmJZMas
+trZ5NybXAgiU7LVipKvkZTb1UwNj0HGXBnw+v5VR2+RqjvtszBMeZQ3RuKRo
+PfoOmIqJQsysxhc6h2hDkbufPk5Yzcs3iVLSrw==
+=FVrG
+-----END PGP SIGNATURE-----
