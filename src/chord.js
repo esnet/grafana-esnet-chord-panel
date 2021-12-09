@@ -216,7 +216,7 @@ function prepData(data, src, target, val) {
     // either the provided keys or the guessed keys arent working
     if (sourceVal === null ||sourceVal === undefined ||
       targetVal === null ||targetVal === undefined) {
-      console.log('cant fined the source or target in the data set, bailing');
+      console.log('can not find the source or target in the data set, bailing');
       err = 1;
     }
     names[sourceVal] = 1;
@@ -238,8 +238,10 @@ function prepData(data, src, target, val) {
   }) );
   const matrix = Array.from(index, () => new Array(nameArray.length).fill(0));
   data.forEach((row) => {
-    const s = row[sourceKey];
-    const t = row[targetKey];
+    // The keys of the names object were coerced to strings. If any values here
+    // are not strings, cast them to strings.
+    const s = row[sourceKey].toString();
+    const t = row[targetKey].toString();
     const v = row[valKey];
     // aggregate data
     matrix[index.get(t)][index.get(s)] += v;
