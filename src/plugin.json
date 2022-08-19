@@ -24,7 +24,10 @@
         "url": "https://github.com/grafana/grafana-starter-panel/blob/master/LICENSE"
       }
     ],
-    "screenshots": [],
+    "screenshots": [{
+        "name": "chord-example",
+        "path": "img/Chord-Example.png"
+      }],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
