@@ -1,52 +1,25 @@
-# ESnet Chord Grafana Panel Plugin
+# <span style="color:#4EC1E0; font-weight:bold">Chord Panel Plugin</span>
 
 
 
-This is a panel plugin for generating Chord diagrams in Grafana 7.0+. This plugin used a locally included version of [d3](https://github.com/d3/d3).
+This is a panel plugin for generating Chord diagrams in Grafana 8.0+. This plugin uses a locally included version of [d3](https://github.com/d3/d3).
 
-![Sceenshot](https://github.com/esnet/grafana-esnet-chord-panel/blob/92dcc192ec4bc3cdffcca6a59318b3bc21031fcc/src/img/Chord-Example.png)
+![Screenshot](https://github.com/esnet/grafana-esnet-chord-panel/blob/main/src/img/Chord-Example.png?raw=true)
 
-## Getting started
+## <span style="color:#6D6E71; font-weight:bold">Data</span>
+This plugin uses non time series data and requires each row to have 2 data fields and a metric or value field.
 
-1. Clone this repository to your Grafana plugins directory and install dependencies.
+**NOTE**: If the panel is blank even though your data input is correct, it may be too small.  Try resizing the panel until it is large enough to display the chord diagram.
 
-   ```bash
-   yarn install
-   ```
+## <span style="color:#6D6E71; font-weight:bold">Customizing</span>
+### <span style="color:#FF780C; font-weight:bold">Display</span>
+<span style="color:#6D6E71; font-weight:bold">Source Field:</span> The query field to use as the source of the chord.
 
-2. Build plugin in development mode or run in watch mode.
+<span style="color:#6D6E71; font-weight:bold">Target Field:</span> The query field to use as the target of the chord.
 
-   ```bash
-   yarn dev
-   ```
+<span style="color:#6D6E71; font-weight:bold">Value Field:</span> The query field (usually the metric) to be used to determine the thickness of the each chord.
 
-   or
+<span style="color:#6D6E71; font-weight:bold">Text Length:</span> The amount of space alloted for labels on the outside of the diagram.
 
-   ```bash
-   yarn watch
-   ```
-
-3. Build plugin in production mode (optional during development).
-
-   ```bash
-   yarn build
-   ```
-
-4. Restart Grafana.
-
-   ```bash
-   # May vary based on your environment
-   sudo service grafana-server restart
-   
-   ```
-
-5. Visit localhost:3000 to see the local version of grafana. Use "admin" as the username and "admin" as the password.
-
-> :warning:
-Grafana 8 requires all plugins to be signed by default. To run unsigned plugins during dev, set `app_mode = development` in **grafana.ini** (typically _/etc/grafana/grafana.ini_) and restart grafana.
-
-## ESLint
-
-Eslint is used to lint the js and ts files. To manually run the linter:
-
-   yarn eslint src/**.{js,ts}
+### <span style="color:#FF780C; font-weight:bold">Standard</span>
+<span style="color:#6D6E71; font-weight:bold">Units:</span> Set the units for the values in the Standard Options section.
