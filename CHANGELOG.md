@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.1 (Unreleased)
+## 1.0.1 
 
-Initial Commit, things work, a few things like color palate selection remain.
+First release to Grafana Community plugins
 
