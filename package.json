@@ -1,6 +1,6 @@
 {
   "name": "esnet-chord-panel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ESnet Chord Diagram Plugin for Grafana 7.0+",
   "private": true,
   "scripts": {
