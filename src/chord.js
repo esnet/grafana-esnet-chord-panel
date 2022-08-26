@@ -102,7 +102,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
             const from = nameRevIdx.get(d.source.index);
             const to = nameRevIdx.get(d.target.index);
             const val = fieldDisplay(d.source.value).text;
-            const suffix = fieldDisplay(d.source.value).suffix;
+            const suffix = fieldDisplay(d.source.value).suffix ? fieldDisplay(d.source.value).suffix: '';
             return `${from} to ${to} : ${val} ${suffix}`;
           }));
   // generate the outer bands and text
