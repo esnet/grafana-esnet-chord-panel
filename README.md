@@ -2,7 +2,7 @@
 
 
 
-This is a panel plugin for generating Chord diagrams in Grafana 8.0+. This plugin uses a locally included version of [d3](https://github.com/d3/d3).
+This is a panel plugin for generating Chord diagrams in Grafana 8.3+. This plugin uses a locally included version of [d3](https://github.com/d3/d3).
 
 ![Screenshot](https://github.com/esnet/grafana-esnet-chord-panel/blob/main/src/img/Chord-Example.png?raw=true)
 
