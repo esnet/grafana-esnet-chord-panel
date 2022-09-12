@@ -5,7 +5,7 @@ import {
   FieldColorModeId,
   classicColors,
 } from '@grafana/data';
-import {useTheme} from '@grafana/ui';
+import {useTheme2} from '@grafana/ui';
 
 /** Create the chord diagram using d3.
  * @param {*} elem The parent svg element that will house this diagram
@@ -128,7 +128,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
             const trans = outerRadius+(txtLen/2)+4;
             return `rotate(${rot}) translate(${trans}, 0)`;
           })
-          .attr('fill', theme.colors.text)
+          .attr('fill', theme.colors.text.primary)
           .append('text')
           .attr('text-anchor', (d) => d.startAngle < Math.PI ? 'start' : 'end')
           .attr('transform', (d) => d.startAngle >= Math.PI ?
@@ -324,7 +324,7 @@ function makeColorer(colorBySource, nameRevIdx, frame, src, target, val) {
  */
 function chord(data, src, target, val, height, txtLen, colorBySource,
     pointLength) {
-  const theme = useTheme();
+  const theme = useTheme2();
   // some react related voodoo
   const ref = useD3((svg) => {
     createViz(svg, height, data, src, target, val, txtLen,
