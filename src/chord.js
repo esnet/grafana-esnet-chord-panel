@@ -244,7 +244,7 @@ function prepData(data, src, target, val) {
     const t = row[targetKey].toString();
     const v = row[valKey];
     // aggregate data
-    matrix[index.get(t)][index.get(s)] += v;
+    matrix[index.get(s)][index.get(y)] += v;
   });
   return [matrix, revIdx];
 }
