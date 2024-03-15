@@ -108,10 +108,22 @@ plugin.setPanelOptions((builder) => {
     },
     defaultValue: 100,
   });
+  builder.addSliderInput({
+    path: 'labelSize',
+    name: 'Label Size',
+    description: 'The font size to use for outer labels',
+    defaultValue: 12,
+    settings: {
+      min: 10,
+      max: 16,
+      step: 1,
+    },
+  });
   builder.addSelect({
     path: 'colorBySource',
     name: 'Color By',
-    description: 'Set the chord\'s color to the source or target of the ' +
+    description:
+      'Set the chord\'s color to the source or target of the ' +
       'chord. When a \'by value\' color scheme is selected, this has no effect',
     category: OptionsCategory,
     settings: {
@@ -127,7 +139,7 @@ plugin.setPanelOptions((builder) => {
     path: 'pointLength',
     name: 'Point Length',
     description: 'Adjust the length of the chord point as a percentage of the' +
-      'radius of the chord diagram.',
+    'radius of the chord diagram.',
     category: OptionsCategory,
     settings: {
       placeholder: 'Auto',

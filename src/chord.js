@@ -15,13 +15,14 @@ import {useTheme2} from '@grafana/ui';
  * @param {string} target The data series that will act as * the target
  * @param {string} val The data series that will act as the value
  * @param {integer} txtLen The amount of spaces used for labels
+ * @param {integer} labelSize The font size used for labels
  * @param {boolean} colorBySource Whether to use the source or target field to
  * decide on chord color
  * @param {integer} pointLength The length of the chord point as a percentage of
  * the digram's radius
  * @param {GrafanaTheme} theme
 */
-function createViz(elem, height, data, src, target, val, txtLen,
+function createViz(elem, height, data, src, target, val, txtLen, labelSize,
     colorBySource, pointLength, theme) {
   // do a bit of work to setup the visual layout of the wiget --------
   if ( elem === null) {
@@ -129,6 +130,7 @@ function createViz(elem, height, data, src, target, val, txtLen,
             return `rotate(${rot}) translate(${trans}, 0)`;
           })
           .attr('fill', theme.colors.text.primary)
+          .attr('font-size', labelSize)
           .append('text')
           .attr('text-anchor', (d) => d.startAngle < Math.PI ? 'start' : 'end')
           .attr('transform', (d) => d.startAngle >= Math.PI ?
@@ -316,18 +318,19 @@ function makeColorer(colorBySource, nameRevIdx, frame, src, target, val) {
  * @param {string} val The data series that will act as the value
  * @param {number} height Height of panel
  * @param {number} txtLen Space for the text around the chord diagram
+ * @param {number} labelSize Font size used for labels
  * @param {boolean} colorBySource Should the source or target field be used to
  * color interior chords.
  * @param {number} pointLength The length of the chord point as a percentage of
  * the digram's radius
  * @return {*} A d3 callback
  */
-function chord(data, src, target, val, height, txtLen, colorBySource,
+function chord(data, src, target, val, height, txtLen, labelSize, colorBySource,
     pointLength) {
   const theme = useTheme2();
   // some react related voodoo
   const ref = useD3((svg) => {
-    createViz(svg, height, data, src, target, val, txtLen,
+    createViz(svg, height, data, src, target, val, txtLen, labelSize,
         colorBySource, pointLength, theme);
   });
   return ref;
