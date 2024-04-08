@@ -113,6 +113,7 @@ plugin.setPanelOptions((builder) => {
     name: 'Label Size',
     description: 'The font size to use for outer labels',
     defaultValue: 12,
+    category: OptionsCategory,
     settings: {
       min: 10,
       max: 16,
