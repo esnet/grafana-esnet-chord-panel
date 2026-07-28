@@ -89,9 +89,12 @@ export const ChordPanel = ({ options, data, width, height }: Props) => {
         <Portal>
           <VizTooltipContainer position={{ x: tooltip.x, y: tooltip.y }} offset={{ x: 10, y: 10 }}>
             <div>{tooltip.label}</div>
-            <div>
-              <strong>{tooltip.value}</strong>
-            </div>
+            {tooltip.rows.map((row, i) => (
+              <div key={i}>
+                {row.label ? `${row.label}: ` : null}
+                <strong>{row.value}</strong>
+              </div>
+            ))}
           </VizTooltipContainer>
         </Portal>
       )}

@@ -18,18 +18,32 @@
 // map, since color/value-mapping resolution keys on the raw node identity.
 // NOTE: the outer-ring "unit is undefined" report is already handled by the
 // suffix-guarded formatValue() below (`disp.suffix ? ... : ''`).
+//
+// FEATURE (2026-07-27): outer-ring tooltips break the node total into "Total
+// In" / "Total Out". ChordTooltipData carries a `rows` array instead of a
+// single `value` so one tooltip shape covers both chords (one unlabelled row)
+// and arcs (two labelled rows); see groupTooltip below.
 import * as d3 from 'd3';
 import { DisplayProcessor, GrafanaTheme2 } from '@grafana/data';
 
 import { PrepSuccess } from './data';
 import { ChordDatum, makeColorer } from './colors';
 
-/** Hover payload handed to the React layer for Grafana tooltip rendering. */
-export interface ChordTooltipData {
-  /** e.g. "src → dst" for a chord, or "name (total)" for an outer arc */
-  label: string;
+/** One value line of a tooltip. */
+export interface ChordTooltipRow {
+  /** row caption, e.g. "Total In"; omitted for a chord's single value */
+  label?: string;
   /** formatted value including unit suffix */
   value: string;
+}
+
+/** Hover payload handed to the React layer for Grafana tooltip rendering. */
+export interface ChordTooltipData {
+  /** e.g. "src → dst" for a chord, or the node name for an outer arc */
+  label: string;
+  /** one line per value: chords report a single unlabelled value, outer arcs
+   *  report "Total In" and "Total Out" separately */
+  rows: ChordTooltipRow[];
   /** viewport coordinates of the pointer, for tooltip positioning */
   x: number;
   y: number;
@@ -154,18 +168,26 @@ export function createViz(elem: SVGSVGElement | null, options: ChordVizOptions):
     onTooltip({
       // FEATURE (2026-07-07): mapped labels via displayNames (was raw names).
       label: `${displayNames.get(d.source.index)} → ${displayNames.get(d.target.index)}`,
-      value: formatValue(d.source.value),
+      rows: [{ value: formatValue(d.source.value) }],
       x: event.clientX,
       y: event.clientY,
     });
   };
+  // FEATURE (2026-07-27): the outer arcs report incoming and outgoing flow as
+  // separate lines. A directed chord group's value (d.value) is the sum of
+  // both (see d3-chord's groupSums), which hid the split; matrix[i][j] is the
+  // flow from i to j, so a row sum is the node's outgoing total and a column
+  // sum its incoming total.
+  const totalOut = matrix.map((row) => d3.sum(row));
+  const totalIn = matrix.map((_, j) => d3.sum(matrix, (row) => row[j]));
   const groupTooltip = (event: PointerEvent, d: d3.ChordGroup) => {
-    // A directed chord group's value is the sum of its incoming AND outgoing
-    // flows (see d3-chord's groupSums), i.e. the total through the node.
     onTooltip({
       // FEATURE (2026-07-07): mapped label via displayNames (was raw names).
-      label: `${displayNames.get(d.index)} (total)`,
-      value: formatValue(d.value),
+      label: displayNames.get(d.index) ?? '',
+      rows: [
+        { label: 'Total In', value: formatValue(totalIn[d.index]) },
+        { label: 'Total Out', value: formatValue(totalOut[d.index]) },
+      ],
       x: event.clientX,
       y: event.clientY,
     });

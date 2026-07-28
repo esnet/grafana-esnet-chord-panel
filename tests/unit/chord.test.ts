@@ -71,7 +71,7 @@ describe('createViz', () => {
       ribbon.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 42, clientY: 24 }));
       const payload: ChordTooltipData = onTooltip.mock.calls[i][0];
       seen.push(payload.label);
-      expect(payload).toEqual(expect.objectContaining({ value: expect.any(String), x: 42, y: 24 }));
+      expect(payload).toEqual(expect.objectContaining({ rows: [{ value: expect.any(String) }], x: 42, y: 24 }));
     });
     // The labels must follow the DATA rows (source → target), not the
     // transposed orientation the pre-fix matrix produced.
@@ -81,24 +81,26 @@ describe('createViz', () => {
     expect(onTooltip).toHaveBeenLastCalledWith(null);
   });
 
-  it('reports node totals (incoming + outgoing) on outer arc hover', () => {
+  it('reports incoming and outgoing node totals separately on outer arc hover', () => {
     const svg = buildSvg();
     const onTooltip = jest.fn();
     createViz(svg, vizOptions({ onTooltip }));
 
-    // Hover every arc and collect the reported labels/values.
+    // Hover every arc and collect the reported labels/rows.
     const arcs = svg.querySelectorAll(':scope > g:nth-of-type(2) > g > path');
-    const reported = new Map<string, string>();
+    const reported = new Map<string, ChordTooltipData['rows']>();
     arcs.forEach((arc) => {
       arc.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 5, clientY: 6 }));
       const payload: ChordTooltipData = onTooltip.mock.calls[onTooltip.mock.calls.length - 1][0];
-      reported.set(payload.label, payload.value);
+      reported.set(payload.label, payload.rows);
     });
-    // d3.chordDirected group values combine in + out flow through the node:
-    // LBL 13 out + 0 in; ANL 5 out + 10 in; CERN 0 out + 8 in.
-    expect(reported.get('LBL (total)')).toBe('13');
-    expect(reported.get('ANL (total)')).toBe('15');
-    expect(reported.get('CERN (total)')).toBe('8');
+    // Data rows: LBL→ANL 10, ANL→CERN 5, LBL→CERN 3. d3.chordDirected's group
+    // value lumps in + out together (LBL 13, ANL 15, CERN 8); the tooltip must
+    // split them back apart.
+    const inOut = (name: string) => reported.get(name)!.map((r) => `${r.label}: ${r.value}`);
+    expect(inOut('LBL')).toEqual(['Total In: 0', 'Total Out: 13']);
+    expect(inOut('ANL')).toEqual(['Total In: 10', 'Total Out: 5']);
+    expect(inOut('CERN')).toEqual(['Total In: 8', 'Total Out: 0']);
   });
 
   it('omits the unit suffix (no literal "undefined") when the value field has no unit', () => {
@@ -112,9 +114,9 @@ describe('createViz', () => {
     arcs.forEach((arc) => {
       arc.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 5, clientY: 6 }));
     });
-    const values = onTooltip.mock.calls.map((c) => (c[0] as ChordTooltipData | null)?.value).filter(Boolean);
+    const values = onTooltip.mock.calls.flatMap((c) => (c[0] as ChordTooltipData | null)?.rows ?? []);
     expect(values.length).toBeGreaterThan(0);
-    values.forEach((v) => expect(v).not.toContain('undefined'));
+    values.forEach((r) => expect(r.value).not.toContain('undefined'));
   });
 
   it('appends the unit suffix to tooltip values when the value field has a unit', () => {
@@ -129,7 +131,7 @@ describe('createViz', () => {
     const arcs = svg.querySelectorAll(':scope > g:nth-of-type(2) > g > path');
     arcs[0].dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 5, clientY: 6 }));
     const payload: ChordTooltipData = onTooltip.mock.calls[onTooltip.mock.calls.length - 1][0];
-    expect(payload.value).toMatch(/\bbps$/);
+    payload.rows.forEach((r) => expect(r.value).toMatch(/\bbps$/));
   });
 
   it('shows value-mapped display names in arc labels and tooltip labels', () => {

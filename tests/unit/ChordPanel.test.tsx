@@ -93,6 +93,18 @@ describe('ChordPanel', () => {
     expect(screen.queryByText(/→/)).not.toBeInTheDocument();
   });
 
+  it('splits an outer arc tooltip into Total In / Total Out lines', () => {
+    const { container } = render(<ChordPanel {...buildProps()} />);
+    // Outer arcs live in the second top-level group (the one carrying labels).
+    const arc = container.querySelector('svg > g:nth-of-type(2) > g > path')!;
+    fireEvent(arc, new MouseEvent('pointermove', { bubbles: true, clientX: 100, clientY: 120 }));
+
+    // The node name stands alone, with the two directions on their own lines.
+    expect(screen.getByText(/^Total In:/)).toBeInTheDocument();
+    expect(screen.getByText(/^Total Out:/)).toBeInTheDocument();
+    expect(screen.queryByText(/\(total\)/)).not.toBeInTheDocument();
+  });
+
   it('clears a lingering tooltip when the data refreshes mid-hover', () => {
     const { container, rerender } = render(<ChordPanel {...buildProps()} />);
     const ribbon = container.querySelector('svg g[fill-opacity] path')!;
